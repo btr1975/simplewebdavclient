@@ -1,1 +1,1 @@
-from simplewebdav.simplewebdav import Client, __version__
+from simplewebdavclient.simplewebdavclient import Client

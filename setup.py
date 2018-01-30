@@ -1,7 +1,7 @@
 from setuptools import setup
 
 packages = [
-    'simplewebdav'
+    'simplewebdavclient'
 ]
 
 install_requires = [
@@ -13,12 +13,12 @@ tests_require = [
 ]
 
 setup(
-    name='simplewebdav',
+    name='simplewebdavclient',
     version='1.0.0',
     python_requires='~=3.3',
-    description='This is a library used to make WebDav Connections simple.',
+    description='This is a library used to make WebDav Client Connections simple.',
     keywords='webdav simple',
-    url='https://github.com/btr1975/simplewebdav',
+    url='https://github.com/btr1975/simplewebdavclient',
     author='Benjamin P. Trachtenberg',
     author_email='e_ben_75-python@yahoo.com',
     license='MIT',
