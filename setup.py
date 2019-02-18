@@ -5,7 +5,7 @@ packages = [
 ]
 
 install_requires = [
-    'requests == 2.18.4',
+    'requests == 2.21.0',
 ]
 
 tests_require = [
@@ -14,7 +14,7 @@ tests_require = [
 
 setup(
     name='simplewebdavclient',
-    version='1.0.0',
+    version='1.0.1',
     python_requires='~=3.3',
     description='This is a library used to make WebDav Client Connections simple.',
     keywords='webdav simple',
