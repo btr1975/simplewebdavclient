@@ -10,7 +10,7 @@ __copyright__ = "Copyright (c) 2018, Benjamin P. Trachtenberg"
 __credits__ = 'Benjamin P. Trachtenberg'
 __license__ = 'MIT'
 __status__ = 'prod'
-__version_info__ = (1, 0, 1)
+__version_info__ = (1, 0, 2)
 __version__ = '.'.join(map(str, __version_info__))
 __maintainer__ = 'Benjamin P. Trachtenberg'
 __email__ = 'e_ben_75-python@yahoo.com'
@@ -20,7 +20,22 @@ LOGGER = logging.getLogger(__name__)
 class FileData(object):
     """
     Class to store a file info
+
+    :type resource_url: String
+    :param resource_url: The resource URL
+    :type resource_name: String
+    :param resource_name: The name of the resource
+    :type file_size: String
+    :param file_size: The file size
+    :type modified_time: String
+    :param modified_time: The modified date/time
+    :type creation_time: String
+    :param creation_time: The creation date/time
+    :type content_type: String
+    :param content_type: The content type
+
     """
+
     def __init__(self, resource_url, resource_name, file_size, modified_time, creation_time, content_type):
         self.resource_url = resource_url
         self.resource_name = resource_name
@@ -32,8 +47,9 @@ class FileData(object):
     def get_resource_url(self):
         """
         Method to get the WebDav resource url
-        :return:
-            A String resource url
+
+        :rtype: String
+        :return: A resource url
 
         """
         return self.resource_url
@@ -41,8 +57,9 @@ class FileData(object):
     def get_resource_name(self):
         """
         Method to get the WebDav resource name
-        :return:
-            A String resource name
+
+        :rtype: String
+        :return: A resource name
 
         """
         return self.resource_name
@@ -50,8 +67,9 @@ class FileData(object):
     def get_file_size(self):
         """
         Method to get the WebDav resource file size
-        :return:
-            A String resource file size
+
+        :rtype: String
+        :return: A resource file size
 
         """
         return self.file_size
@@ -59,8 +77,9 @@ class FileData(object):
     def get_modified_time(self):
         """
         Method to get the WebDav resource modified date and time
-        :return:
-            A String resource modified date and time
+
+        :rtype: String
+        :return: A resource modified date and time
 
         """
         return self.modified_time
@@ -68,8 +87,9 @@ class FileData(object):
     def get_creation_time(self):
         """
         Method to get the WebDav resource creation date and time
-        :return:
-            A String resource creation date and time
+
+        :rtype: String
+        :return: A resource creation date and time
 
         """
         return self.creation_time
@@ -77,8 +97,9 @@ class FileData(object):
     def get_content_type(self):
         """
         Method to get the WebDav resource content type
-        :return:
-            A String resource content type
+
+        :rtype: String
+        :return: A resource content type
 
         """
         return self.content_type
@@ -86,8 +107,9 @@ class FileData(object):
     def is_dir(self):
         """
         Method to check to see if WebDav resource is a directory
-        :return:
-            Boolean True or False
+
+        :rtype: Boolean
+        :return: True or False
 
         """
         if self.resource_url.endswith('/'):
@@ -98,6 +120,32 @@ class FileData(object):
 
 
 class Client(object):
+    """
+    Class for WebDav Client
+
+    :type host: String
+    :param host: IP of the server
+    :type port: Integer
+    :param port: The TCT/UDP Port Number
+    :type auth: String
+    :param auth: Session auth
+    :type username: String
+    :param username: Username
+    :type password: String
+    :param password: Password
+    :type protocol: String
+    :param protocol: http, or https
+    :type verify_ssl: Boolean
+    :param verify_ssl: True or False
+    :type path: String
+    :param path: The path to the resource
+    :type cert: String
+    :param cert: Session cert
+
+    :raises CouldNotDetermineProtocol: If protocol is not http or https
+
+    """
+
     def __init__(self, host, port=None, auth=None, username=None, password=None,
                  protocol='http', verify_ssl=True, path=None, cert=None):
         if not port:
@@ -135,12 +183,18 @@ class Client(object):
     def _send(self, method, path, expected_code, **kwargs):
         """
         Method to send data to WebDav server
+
+        :type method:
         :param method: WebDav Method
+        :type path: String
         :param path: WebDav Path to resource
+        :type expected_code: Number
         :param expected_code: Expected HTTP Status Codes
+        type kwargs: KWARGS
         :param kwargs: Key Word Arguments
-        :return:
-            A response
+
+        :rtype: requests.response Object
+        :return: A response
 
         """
         url = self._get_url(path)
@@ -154,9 +208,12 @@ class Client(object):
     def _get_url(self, path):
         """
         Method used to get a good url
+
+        :type path: String
         :param path: Path from the root directory
-        :return:
-            A good url
+
+        :rtype: String
+        :return: A good url
 
         """
         path = str(path).strip()
@@ -168,9 +225,12 @@ class Client(object):
     def change_current_working_directory(self, path):
         """
         Method to change your current working directory
+
+        :type path: String
         :param path: Path from your root
-        :return:
-            None
+
+        :rtype: None
+        :return: None
 
         """
         path = path.strip()
@@ -189,10 +249,14 @@ class Client(object):
     def directory_create(self, path, safe=False):
         """
         Method to make a directory
+
+        :type path: String
         :param path: Path from your root
+        :type safe: Boolean
         :param safe: If set to True it will silently do nothing is if directory already exists
-        :return:
-            None
+
+        :rtype: None
+        :return: None
 
         """
         expected_codes = 201 if not safe else (201, 301, 405)
@@ -201,9 +265,12 @@ class Client(object):
     def directories_create(self, path):
         """
         Method to create nested directories
+
+        :type path: String
         :param path: Path from your root
-        :return:
-            None
+
+        :rtype: None
+        :return: None
 
         """
         directories = [d for d in path.split('/') if d]
@@ -232,10 +299,14 @@ class Client(object):
     def directory_delete(self, path, safe=False):
         """
         Method to delete a directory
+
+        :type path: String
         :param path: Path from your root
-        :param safe: If set to True it will silently do nothing is if directory does not exist
-        :return:
-            None
+        :type safe: Boolean
+        :param safe: If set to True it will silently do nothing is if directory already exists
+
+        :rtype: None
+        :return: None
 
         """
         path = str(path).rstrip('/') + '/'
@@ -245,9 +316,12 @@ class Client(object):
     def resource_delete(self, path):
         """
         Mwethod to delete a resource
-        :param path:
-        :return:
-            None
+
+        :type path: String
+        :param path: Path from your root
+
+        :rtype: None
+        :return: None
 
         """
         expected_codes = (200, 204)
@@ -256,10 +330,14 @@ class Client(object):
     def upload(self, local_path_or_fileobj, remote_path):
         """
         Method to upload files to WebDav Server
-        :param local_path_or_fileobj:
-        :param remote_path:
-        :return:
-            None
+
+        :type local_path_or_fileobj: String
+        :param local_path_or_fileobj: The path
+        :type remote_path: String
+        :param remote_path: The path
+
+        :rtype: None
+        :return: None
 
         """
         expected_codes = (200, 201, 204)
@@ -269,10 +347,15 @@ class Client(object):
     def download(self, remote_path, local_path_or_fileobj):
         """
         Method to download files from WebDav server
-        :param remote_path:
-        :param local_path_or_fileobj:
-        :return:
-            None
+
+        :type remote_path: String
+        :param remote_path: The path
+        :type local_path_or_fileobj: String
+        :param local_path_or_fileobj: The path
+
+        :rtype: None
+        :return: None
+
 
         """
         download_chunk_size_bytes = 1 * 1024 * 1024
@@ -285,9 +368,12 @@ class Client(object):
     def resource_list(self, remote_path='.'):
         """
         Method to list resources on the WebDav server
-        :param remote_path:
-        :return:
-            A list of FileData objects
+
+        :type remote_path: String
+        :param remote_path: The path
+
+        :type: List
+        :return: A list of FileData objects
 
         """
         headers = {'Depth': '1'}
@@ -305,9 +391,12 @@ class Client(object):
     def resource_exists(self, remote_path):
         """
         Method to verify if a resource exists on the WebDav server
-        :param remote_path:
-        :return:
-            Boolean
+
+        :type remote_path: String
+        :param remote_path: The path
+
+        :rtype: Boolean
+        :return: True or False
 
         """
         expected_codes = (200, 301, 404)
@@ -317,8 +406,9 @@ class Client(object):
     def get_current_working_directory(self):
         """
         Method to get current working directory
-        :return:
-            The current working directory
+
+        :rtype: String
+        :return: The current working directory
 
         """
         return self.current_working_directory
@@ -326,8 +416,9 @@ class Client(object):
     def get_base_url(self):
         """
         Method to get base url
-        :return:
-            The base url
+
+        :rtype: String
+        :return: The base url
 
         """
         return self.base_url
@@ -336,11 +427,16 @@ class Client(object):
     def get_xml_element(element, element_name, default=None):
         """
         Method to retrieve the data from the xml tree
-        :param element:
+
+        :type element: String
+        :param element: The xml element
+        :type element_name: String
         :param element_name: The property
+        :type default: String
         :param default: What to set default to
-        :return:
-            A String
+
+        :rtype: String
+        :return: A String
 
         """
         child = element.find('.//{DAV:}' + element_name)
@@ -349,9 +445,12 @@ class Client(object):
     def __file_object_builder(self, element):
         """
         Method to build FileData objects
+
+        :type element: String
         :param element: The xml element
-        :return:
-            A FileData object
+
+        :rtype: FileData Object
+        :return: A FileData object
 
         """
         return FileData(resource_url=self.get_xml_element(element, 'href'),

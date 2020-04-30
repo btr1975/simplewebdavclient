@@ -5,7 +5,7 @@ __copyright__ = "Copyright (c) 2018, Benjamin P. Trachtenberg"
 __credits__ = 'Benjamin P. Trachtenberg'
 __license__ = 'MIT'
 __status__ = 'prod'
-__version_info__ = (1, 0, 0, __status__)
+__version_info__ = (1, 0, 1)
 __version__ = '.'.join(map(str, __version_info__))
 __maintainer__ = 'Benjamin P. Trachtenberg'
 __email__ = 'e_ben_75-python@yahoo.com'
@@ -15,10 +15,14 @@ LOGGER = logging.getLogger(__name__)
 def check_number(number):
     """
     Function to verify item entered is a number
-    :param
-        number: Thing to check for a number
-    :return
-        Exception if it is not good
+
+    :type number: Integer
+    :param number: Thing to check for a number
+
+    :rtype: None
+    :return: None
+
+    :raises NotNumber: If number is not a number
 
     """
     try:
@@ -31,11 +35,15 @@ def check_number(number):
 
 def check_tcp_udp_port_number(port_number):
     """
-    Function to verify a  tcp or udp port number 0 to 65535
-    :param
-        port_number: The VLAN number
-    :return
-        Exception if it is not good
+    Function to verify a  tcp or udp port number 1 to 65535
+
+    :type port_number: Integer
+    :param port_number: TCP/UDP Port Number
+
+    :rtype: None
+    :return: None
+
+    :raises BadPortNumber: If the port is not in range 1 to 65535
 
     """
     check_number(port_number)
