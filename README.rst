@@ -7,8 +7,8 @@ Written By: Benjamin P. Trachtenberg
 If you have any questions e-mail me
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Contact Information: e\_ben\_75-python@yahoo.com
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contact Information: e_ben_75-python@yahoo.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 LinkedIn: `Ben Trachtenberg <https://www.linkedin.com/in/ben-trachtenberg-3a78496>`__
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,8 +30,8 @@ Requirements
 Installation
 ~~~~~~~~~~~~
 
--  From source "setup.py install"
--  From pip "pip install simplewebdavclient"
+-  From source “setup.py install”
+-  From pip “pip install simplewebdavclient”
 
 Languages
 ~~~~~~~~~
